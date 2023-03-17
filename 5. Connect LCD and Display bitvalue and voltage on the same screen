@@ -1,0 +1,37 @@
+/* This program uses the analog input and displays the bit and voltage value on the LCD
+Display using the LCD library. */ 
+
+#include <LiquidCrystal.h>// This line is a setup for the LCD library
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+int AnIN = A0;// set int as Ao port
+int val = 0; // storing bit of the bit value
+double volt = 0.0;// storing bit of volt 
+
+
+void setup() {
+  // put your setup code here, to run once:
+lcd.begin(16,2); // set up the available space on the LCD display. 16 colums and 2 rows
+
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+val = analogRead(AnIN);// read the analog input for the potentiometer
+double volt = (val * 5.0) / 1023.0; // converts the bit value into voltage value
+
+//bit value
+// the lcd cursor sets the position of the text (x,y) column 0 and row 0 
+lcd.setCursor(0, 0); 
+lcd.print ("val value ="); // the the text betwene the quotation marks
+lcd.print (val );// print the actual value of the variable
+lcd.print("                 "); // this line removes any visual inconsistencies between big and small values
+
+//voltage value
+lcd.setCursor(0, 1);
+lcd.print ( "volt value =");
+lcd.println (volt);
+lcd.print("                 ");
+}
