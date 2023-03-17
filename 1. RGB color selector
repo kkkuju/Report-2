@@ -1,57 +1,21 @@
-/* This program demonstrate the analog input's relationship with the analog output
-by reading the analog input value and modifying the analog output value*/
+// this program demonstrate the analog output function 
 
-
-int AnIN = A0;// set int as Ao port
-float val = 0.0; // storing bit
+int ledR = 9;         // the PWM pin the LED is attached to
+int ledG = 3;         // the PWM pin the LED is attached to
+int ledB = 5;         // the PWM pin the LED is attached to
 
 
 void setup() {
   // put your setup code here, to run once:
-val = analogRead(AnIN);// read the value of the analog input
-
+  pinMode(ledR, OUTPUT); // setup each variable as an output
+  pinMode(ledG, OUTPUT);
+  pinMode(ledB, OUTPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-// POTENTIOMETER LIGHT LEVEL 
-//at each step with the condition one of the color turns on then off at the next condition.
-
-if (val <200){ 
-  analogWrite(9, 0);
-  analogWrite(10, 0);
-  analogWrite(11, 0);
-}
-
-
-if (val >= 200 && val <600){ 
-  analogWrite(9, 255);
-  analogWrite(10, 128);
-  analogWrite(11, 0);
-}
-
-
-if (val >= 600 && val <800){ 
-  analogWrite(9, 0);
-  analogWrite(10, 255);
-  analogWrite(11, 255);
-  }
-
-
- if (val >= 800 && val < 1000){ 
-  analogWrite(9, 225);
-  analogWrite(10, 0);
-  analogWrite(11, 128);
-  }
-
-
- if (val >= 1000){ 
-  analogWrite(9, 0);
-  analogWrite(10, 0);
-  analogWrite(11, 0);
-}
-
-
-
+ // the value of each output combined to become a color on the color spectrum. 
+ analogWrite(ledR, 155);
+analogWrite(ledG, 6);
+analogWrite(ledB, 125);
 }
