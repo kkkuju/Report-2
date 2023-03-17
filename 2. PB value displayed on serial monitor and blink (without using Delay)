@@ -1,0 +1,41 @@
+/*The program demonstrate the blink without delay function using digital output and the if condition
+It also shows the value of the pushbutton on the serial display.*/
+
+
+int PB = 0;//storing bit for pushbutton
+int State = LOW;// This sets the value as LOW or HIGH for the led
+unsigned long previousMillis = 0;  // will store last time LED was updated
+const long interval = 1000;  // interval at which to blink (milliseconds)
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(13, INPUT_PULLUP);//setup input for pin 13
+pinMode(5, OUTPUT);//setup output for pin 5
+Serial.begin(9600);//begin the serial print
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+ PB = digitalRead(13);//read the value of the pin 13
+Serial.print ("button=  ");
+Serial.println (PB);
+
+unsigned long currentMillis = millis();
+
+if (currentMillis - previousMillis >= interval) {// this equation determines the current time in relation to the set delay time
+    // save the last time you blinked the LED
+    previousMillis = currentMillis;
+
+    // if the LED is off turn it on and vice-versa:
+    if (State == LOW) {
+      State = HIGH;
+    } else {
+      State = LOW;
+    }
+
+    // Turns the led on or off based on the State variable
+    digitalWrite(13, State);
+  }
+
+}
