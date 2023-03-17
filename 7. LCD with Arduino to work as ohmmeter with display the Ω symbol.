@@ -1,0 +1,73 @@
+/* This program acts like a ohmmeter by finding the resistor value from ohm's law using resistors on the analog input. 
+Then displays it on the LCD display with the omega symbol. Any resistance value above 1000 will be converted into Kilo.*/
+
+
+// This line is a setup for the LCD library
+#include <LiquidCrystal.h>
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(7, 8, 9, 10, 11, 12);
+
+//setup for the character of the omega symbol. The lines are from a generator to setup a custom shape
+byte ohm [8] = {
+  B00000,
+  B00000,
+  B00000,
+  B01110,
+  B10001,
+  B10001,
+  B01010,
+  B11011
+};
+
+int AnIN = A0;// set int as Ao port
+int val = 0.0; // storing bit of raw input value
+float volt = 0.0;// storing bit of volt 
+float IA = 0.0;// storing bit of the current value
+float RB = 0.0;// storing bit of of the resistor vlaue
+
+void setup() {
+  // put your setup code here, to run once:
+
+lcd.createChar(0, ohm );// this line creates the custom shape that was added as byte 0
+lcd.begin(16,2); // set up the available space on the LCD display. 16 colums and 2 rows
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+val = analogRead(AnIN);
+//equations to find the value of the resistor by applying ohm's law
+float volt = (val * 5.0) / 1023.0; 
+float IA = (5.0 - volt)/994.0;
+float RB = (volt - 0.0)/ IA;
+
+
+
+if (RB<1000.0){// display the actual value of the resistor value without any conversion
+  
+   lcd.setCursor(0, 0);// the lcd cursor sets the position of the text (x,y) column 0 and row 0 
+  lcd.print ("RB = ");// the the text between the quotation marks
+  lcd.print(RB);// print the actual value of the variable
+  lcd.write(byte(0));// print the custom character created and stored in the byte 0 previously above
+  lcd.print ("       ");// removes any visual inconsistancies
+}
+else {
+//Converts the ohm value to Kilo when above 1000. If below, prints actual value
+  
+   lcd.setCursor(0, 0);
+  lcd.print ("RB = ");
+  lcd.print(RB/1000.0);// equation to divid the value of the RB by 1000, converting it to Kilo
+  lcd.print ("K ");
+  lcd.write(byte(0));
+  lcd.print ("       ");
+
+}
+
+// always display the voltage value on the second column
+lcd.setCursor(0, 1);// the lcd cursor sets the position of the text (x,y) column 1 and row 0 
+  lcd.print ("Volt = ");
+  lcd.print(volt);
+  lcd.print ("V ");
+
+}
