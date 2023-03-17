@@ -1,0 +1,30 @@
+/*this program demonstrate the analog input by using a potentiometer and displaying its value
+on the serial monitor*/
+
+int AnIN = A0;// set int as Ao port
+float val = 0.0; // storing bit for potentiometer
+float volt = 0.0;// storing bit of volt 
+
+
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600); //begn serial print
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+val = analogRead(AnIN);// read the vlaue of the analog pin
+float volt = (val * 5.0) / 1023.0; //convert the val value to voltage value
+
+
+Serial.print ("val value ="); //print the text in quotation marks
+Serial.print (val );          // print the value of the vairable val
+Serial.print ( "\t volt value =");
+Serial.print (volt);
+Serial.println ( "\t"); // tab space
+
+
+
+}
