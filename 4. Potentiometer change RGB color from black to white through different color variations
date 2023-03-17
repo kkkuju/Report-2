@@ -1,0 +1,58 @@
+/* This program demonstrate the analog input and analog output
+by reading the analog input value and modifying the analog output value on a RGB Led*/
+
+
+int AnIN = A0;// set int as Ao port
+float val = 0.0; // storing bit
+
+
+void setup() {
+  // put your setup code here, to run once:
+val = analogRead(AnIN);// read the value of the analog input
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+// POTENTIOMETER LIGHT LEVEL 
+//at each step with the condition one of the color turns on then off at the next condition.
+
+//bit value below 200 led is black/off
+if (val <200){ 
+  analogWrite(9, 0);
+  analogWrite(10, 0);
+  analogWrite(11, 0);
+}
+
+
+if (val >= 200 && val <600){ 
+  analogWrite(9, 255);
+  analogWrite(10, 128);
+  analogWrite(11, 0);
+}
+
+
+if (val >= 600 && val <800){ 
+  analogWrite(9, 0);
+  analogWrite(10, 255);
+  analogWrite(11, 255);
+  }
+
+
+ if (val >= 800 && val < 1000){ 
+  analogWrite(9, 225);
+  analogWrite(10, 0);
+  analogWrite(11, 128);
+  }
+
+//bit value above 1000 led is white
+ if (val >= 1000){ 
+  analogWrite(9, 225);
+  analogWrite(10, 225);
+  analogWrite(11, 225);
+}
+
+
+
+}
