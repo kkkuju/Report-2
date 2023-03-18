@@ -1,4 +1,4 @@
-/*The program demonstrate the blink without delay function using digital output and the if condition
+/*The program demonstrate the blink without delay function using the millis on the digital output and the if condition.
 It also shows the value of the pushbutton on the serial display.*/
 
 
