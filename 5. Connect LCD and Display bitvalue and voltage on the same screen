@@ -25,7 +25,7 @@ double volt = (val * 5.0) / 1023.0; // converts the bit value into voltage value
 //bit value
 // the lcd cursor sets the position of the text (x,y) column 0 and row 0 
 lcd.setCursor(0, 0); 
-lcd.print ("val value ="); // the the text betwene the quotation marks
+lcd.print ("val value ="); // print the text betwene the quotation marks
 lcd.print (val );// print the actual value of the variable
 lcd.print("                 "); // this line removes any visual inconsistencies between big and small values
 
